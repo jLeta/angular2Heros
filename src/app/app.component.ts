@@ -1,23 +1,8 @@
 import { Component } from '@angular/core';
+import {Hero} from './hero';
+import {HeroService}  from './hero.service';
 
 
-export class Hero{
-  id:number;
-  name:string;
-}
-
-const HEROES: Hero[] = [
-  { id: 11, name: 'Mr. Nice' },
-  { id: 12, name: 'Narco' },
-  { id: 13, name: 'Bombasto' },
-  { id: 14, name: 'Celeritas' },
-  { id: 15, name: 'Magneta' },
-  { id: 16, name: 'RubberMan' },
-  { id: 17, name: 'Dynama' },
-  { id: 18, name: 'Dr IQ' },
-  { id: 19, name: 'Magma' },
-  { id: 20, name: 'Tornado' }
-];
 
 
 @Component({
@@ -29,17 +14,22 @@ export class AppComponent {
   
   title = 'Tour of Heroes';
 
-  heroes = HEROES;
-
-  isHeroSelected:boolean = false;
+  heroes: Hero[];
 
   selectedHero:Hero;
 
-  onHeroSelect(hero:Hero) {
-    this.isHeroSelected = true;
-    this.selectedHero = hero;
+  constructor(private heroService:HeroService){
   }
 
+  ngOnInit(){
+    //call the promise, and then tell it what call back funtion it will call
+    //then the promise response is ready :)   
+    this.heroService.getHeroes().then(heros => this.heroes = heros);
+  }
+
+  onHeroSelect(hero:Hero) {
+    this.selectedHero = hero;
+  }
 
 }
 
