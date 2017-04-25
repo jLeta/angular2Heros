@@ -26,8 +26,21 @@ const HEROES: Hero[] = [
   styleUrls: ['./app.component.css']
 })
 export class AppComponent {
+  
   title = 'Tour of Heroes';
+
   heroes = HEROES;
+
+  isHeroSelected:boolean = false;
+
+  selectedHero:Hero;
+
+  onHeroSelect(hero:Hero) {
+    this.isHeroSelected = true;
+    this.selectedHero = hero;
+  }
+
+
 }
 
 
