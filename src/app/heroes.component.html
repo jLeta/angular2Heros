@@ -1,14 +1,16 @@
-
-<h2>My Heroes</h2>
+<h2>
+  My Heroes</h2>
 <ul class="heroes">
-  <li *ngFor="let hero of heroes" (click)="onHeroSelect(hero)" [class.selected] = "hero === selectedHero">
-    <span class="badge">{{hero.id}}</span> {{hero.name}}
+  <li *ngFor="let hero of heroes" (click)="onHeroSelect(hero)" [class.selected]="hero === selectedHero">
+    <a [routerLink]="['/detail', hero.id]">
+      <span class="badge">{{hero.id}}</span> {{hero.name}}
+    </a>
   </li>
 </ul>
 
-<!-- plug dero detail component here, passing selectedHero as a hero -->
-<hero-detail [hero]="selectedHero"></hero-detail>
-
-
-
-
+<div *ngIf="selectedHero">
+  <h2>
+    {{selectedHero.name | uppercase}} is my hero
+  </h2>
+  <button (click)="gotoDetail()">View Details</button>
+</div>
